@@ -59,25 +59,21 @@ export default class Character implements Fighter {
   }
 
   receiveDamage(attackPoints: number): number {
-    this._defense -= attackPoints;
-    if (attackPoints > 0) {
-      this._lifePoints -= attackPoints;
-      if (this._lifePoints < 0) {
+    const damage = attackPoints - this._defense;
+    if (damage > 0) {
+      this._lifePoints -= damage;
+      if (this._lifePoints <= 0) {
         this._lifePoints = -1;
       }
     }
-    return this.lifePoints;
+    return this._lifePoints;
   }
 
   attack(enemy: Fighter): void {
-    const attackPoints = this.strength;
-    enemy.receiveDamage(attackPoints);
+    enemy.receiveDamage(this._strength);
   }
   
-  special(enemy?: Fighter): void {
-    const attackPoints = this.strength * 100;
-    enemy?.receiveDamage(attackPoints);
-  }
+  special?(): void;
 
   levelUp(): void {
     this._maxLifePoints += getRandomInt(1, 10);
