@@ -1,14 +1,12 @@
 import { SimpleFighter } from './Fighter';
+import Monster from './Monster';
 import getRandomInt from './utils';
 
-export default class Monster implements SimpleFighter {
-  protected _lifePoints: number;
-  protected _strength: number;
-  protected _defense: number;
-
-  constructor(lifePoints = 85, strength = 63) {
-    this._lifePoints = lifePoints;
-    this._strength = strength;
+export default class Dragon extends Monster {
+  constructor() {
+    super();
+    this._lifePoints = 999;
+    this._strength = 63;
     this._defense = getRandomInt(1, 10);
   }
 
